@@ -5,6 +5,8 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { setAuthUser } from "../redux/userSlice";
 
+const apiUrl = process.env.REACT_APP_API_URL;
+
 const Login = () => {
   const [user, setUser] = useState({
     username: "",
@@ -17,7 +19,7 @@ const Login = () => {
     e.preventDefault();
     try {
       const res = await axios.post(
-        "http://localhost:8080/api/v1/user/login",
+        "${apiUrl}/api/v1/user/login",
         user,
         {
           headers: {
