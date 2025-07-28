@@ -71,7 +71,7 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { setAuthUser, setOtherUsers, setSelectedUser } from '../redux/userSlice';
-import { clearMessages } from '../redux/messageSlice'; // ✅ 1. Import clearMessages
+import { setMessages } from '../redux/messageSlice'; // ✅ 1. Import clearMessages
 
 const Sidebar = () => {
     const [search, setSearch] = useState("");
