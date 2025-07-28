@@ -10,8 +10,11 @@ const useGetOtherUsers = () => {
     const fetchOtherUsers = async () => {
       try {
         axios.defaults.withCredentials = true;
-        const res = await axios.get(`http://localhost:8080/api/v1/user/`);
-        console.log(res);
+        
+        // ✅ Use the environment variable for the live URL
+        const apiUrl = process.env.REACT_APP_API_URL;
+        const res = await axios.get(`${apiUrl}/api/v1/user/`);
+        
         //store
         dispatch(setOtherUsers(res.data));
       } catch (error) {
