@@ -19,7 +19,9 @@ const Signup = () => {
   const onSubmitHandler = async (e) => {
     e.preventDefault();
     try{
-      const res = await axios.post('http://localhost:8080/api/v1/user/register',user,{
+      // ✅ 1. Use the environment variable for the live URL
+            const apiUrl = process.env.REACT_APP_API_URL;
+            const res = await axios.post(`${apiUrl}/api/v1/user/register`, user, {
         headers: {
           'Content-Type': 'application/json'
         },
