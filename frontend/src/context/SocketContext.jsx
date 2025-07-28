@@ -14,7 +14,7 @@ export const SocketProvider = ({ children }) => {
 
   useEffect(() => {
     if (authUser) {
-      const newSocket = io("http://localhost:8080", { // Your backend URL
+      const newSocket = io("https://chat-application-backend-4lsc.onrender.com/", { // Your backend URL
         query: {
           userId: authUser._id,
         },
