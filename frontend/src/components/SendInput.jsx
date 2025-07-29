@@ -53,25 +53,29 @@
 import React, { useState } from 'react';
 import { IoSend } from "react-icons/io5";
 import axios from "axios";
-import { useSelector } from "react-redux";
-// No longer need useDispatch or setMessages
+import { useSelector, useDispatch } from "react-redux";
+import { addMessage } from '../redux/messageSlice'; // 👈 1. Import addMessage
 
 const SendInput = () => {
     const [message, setMessage] = useState("");
     const { selectedUser } = useSelector(store => store.user);
+    const dispatch = useDispatch(); // 👈 2. Get the dispatch function
 
     const onSubmitHandler = async (e) => {
         e.preventDefault();
+        if (!message) return; // Prevent sending empty messages
+
         try {
-            // ✅ Use the environment variable for the URL
             const apiUrl = process.env.REACT_APP_API_URL;
-            await axios.post(`${apiUrl}/api/v1/message/send/${selectedUser?._id}`, { message }, {
+            const res = await axios.post(`${apiUrl}/api/v1/message/send/${selectedUser?._id}`, { message }, {
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 withCredentials: true
             });
-            // ✅ The dispatch logic is removed from here.
+
+            // 3. Dispatch the new message from the API response
+            dispatch(addMessage({ conversationId: selectedUser._id, message: res.data }));
 
         } catch (error) {
             console.log(error);
@@ -97,7 +101,3 @@ const SendInput = () => {
 }
 
 export default SendInput;
-
-
-
-
