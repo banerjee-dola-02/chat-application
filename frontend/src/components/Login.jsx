@@ -19,7 +19,7 @@ const Login = () => {
     e.preventDefault();
     try {
       const res = await axios.post(
-        "${apiUrl}/api/v1/user/login",
+        `${apiUrl}/api/v1/user/login`,
         user,
         {
           headers: {
