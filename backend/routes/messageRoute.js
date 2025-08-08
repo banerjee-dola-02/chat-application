@@ -5,8 +5,11 @@ import isAuthenticated from "../middleware/isAuthenticated.js";
 
 const router = express.Router();
 
-router.route("/send/:id").post(isAuthenticated,sendMessage);
-router.route("/:id").post(isAuthenticated,getMessage);
+// THIS IS THE ROUTE YOU ARE LIKELY MISSING 👇
+router.get("/:id", isAuthenticated, getMessages);
+
+// This is the route you probably already have
+router.post("/send/:id", isAuthenticated, sendMessage);
 
 
 export default router;
